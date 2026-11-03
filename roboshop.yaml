@@ -2,7 +2,7 @@
   hosts: local
   connection: local
   vars:
-    instances: ["mongodb", "redis", "mysql", "rabbitmq", "catalogue", "user", "cart", "shipping", "payment", "frontend"]
+    instances: ["mongodb", "redis", "mysql", "rabbitmq", "catalogue"]
     env_action: create
     domain_name: devopslab.shop
     ami_id: ami-0d97d7f07b25dd693
