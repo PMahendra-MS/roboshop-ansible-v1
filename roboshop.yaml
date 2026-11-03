@@ -2,10 +2,10 @@
   hosts: local
   connection: local
   vars:
-    instances: ["mongodb", "redis", "mysql"]
+    instances: ["mongodb", "redis", "mysql", "rabbitmq", "catalogue", "user", "cart", "shipping", "payment", "frontend"]
     env_action: create
     domain_name: devopslab.shop
-    ami_id: ami-0055977a6e828a4f4
+    ami_id: ami-0d97d7f07b25dd693
   tasks:
   - name: create ec2 instance
     amazon.aws.ec2_instance:
@@ -16,18 +16,18 @@
       region: us-east-1
     loop: "{{ instances }}"
     when: env_action == "create"
-    register: ec2_output
+    # register: ec2_output
 
     
 
-  - name: create R53 record
-    amazon.aws.route53:
-      state: present
-      zone: "{{ domain_name }}"
-      record: "{{ item.item }}.{{ domain_name }}"
-      type: A
-      ttl: 1
-      value: "{{ item.instances[0].private_ip_address }}"
-      overwrite: true
-    loop: "{{ ec2_output.results }}"
-    when: env_action == "create"
+  # - name: create R53 record
+  #   amazon.aws.route53:
+  #     state: present
+  #     zone: "{{ domain_name }}"
+  #     record: "{{ item.item }}.{{ domain_name }}"
+  #     type: A
+  #     ttl: 1
+  #     value: "{{ item.instances[0].private_ip_address }}"
+  #     overwrite: true
+  #   loop: "{{ ec2_output.results }}"
+  #   when: env_action == "create"
