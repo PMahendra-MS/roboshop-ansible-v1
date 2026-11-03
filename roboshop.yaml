@@ -17,9 +17,9 @@
       region: us-east-1
     loop: "{{ instances }}"
     when: env_action == "create"
-    register: ec2_output
+   # register: ec2_output
 
-  - name: 
+  # - name: 
  
     
 
